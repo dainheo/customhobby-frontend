@@ -1,0 +1,228 @@
+.hdp-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 50px;
+  padding: 40px 70px;
+  background-color: #fafafa;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+}
+
+
+/* 왼쪽 설명 */
+.hdp-left {
+  flex: 1.2;
+}
+
+.hdp-title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.hdp-image-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 18px;
+  text-align: center;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.hdp-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+}
+
+.hdp-info {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.hdp-info h2,
+.hdp-info h3 {
+  margin-top: 12px;
+  color: #333;
+}
+
+/* 오른쪽 모임 목록 */
+.hdp-right {
+  flex: 1;
+}
+
+.hdp-subtitle {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.hdp-meeting-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hdp-meeting-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.hdp-meeting-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  object-fit: contain;
+  background: #fafafa;
+}
+
+.hdp-meeting-info h3 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.hdp-meeting-sub {
+  font-size: 13px;
+  color: #666;
+}
+
+/* 공통 카드 높이 강제 — 모든 카드 레이아웃 통일 */
+.hdp-card {
+  min-height: 115px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 첫 번째 모임 이름 카드 강제 높이 */
+.hdp-card:first-of-type {
+  min-height: 100px;
+}
+
+/* 설명 카드 높이 통일 */
+.hdp-card:nth-of-type(2) {
+  min-height: 165px;
+}
+
+/* 단일 row 박스 높이 통일 */
+.hdp-row {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+/* 오른쪽 카드들 높이 통일 */
+.hdp-calendar,
+.hdp-notice,
+.hdp-review,
+.hdp-creator {
+  min-height: 115px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 텍스트 길이에 따라 높이 달라지지 않도록 2줄 제한 */
+.hdp-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 최대 2줄 */
+  overflow: hidden;
+}
+/* 전체 컨테이너 */
+.hdp-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 35px 18px;
+}
+
+/* 상단 카테고리 제목 */
+.hdp-header {
+  margin-bottom: 35px;
+}
+
+/* 메인 콘텐츠 영역 */
+.hdp-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 35px;
+}
+
+/* 왼쪽 영역 (고정 너비) */
+.hdp-left {
+  width: 750px; /* 고정 */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 오른쪽 영역 (고정 너비) */
+.hdp-right {
+  width: 350px; /* 고정 */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 모든 카드 기본 공통 스타일 */
+.hdp-card,
+.hdp-row,
+.hdp-right > div {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+/* 📌 카드 높이 고정 */
+.hdp-card {
+  min-height: 125px;
+}
+
+.hdp-row {
+  min-height: 55px;
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+}
+
+.hdp-right > div {
+  min-height: 100px;
+}
+
+/* 타이틀 스타일 */
+.hdp-card h2,
+.hdp-card h3,
+.hdp-right h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* 본문 텍스트 */
+.hdp-card p,
+.hdp-right p {
+  margin: 3px 0;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+/* 참여하기 버튼 */
+.hdp-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #1a73e8;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  margin-top: 8px;
+}

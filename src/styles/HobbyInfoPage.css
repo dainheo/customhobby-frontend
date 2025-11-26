@@ -1,0 +1,99 @@
+/* ✅ 전체 페이지 컨테이너 */
+.hobbyinfo-page {
+  text-align: center;
+  padding: 50px 20px;
+  box-sizing: border-box;
+}
+
+/* ✅ 제목 영역 */
+.hobbyinfo-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 10px;
+}
+
+.hobbyinfo-subtext {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+/* ✅ 카드 정렬 그리드 */
+.hobbyinfo-grid {
+  display: grid;
+  /* 👉 minmax(250px, 1fr)로 카드 폭을 안정적으로 고정 */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px; /* 카드 간격 확대 */
+  justify-items: center;
+  align-items: stretch; /* 높이 균일하게 */
+  width: 100%;
+  max-width: 1200px; /* ✅ 폭 늘림 */
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* ✅ 개별 취미 카드 */
+.hobbyinfo-card {
+  background-color: #f8f9ff;
+  border: 2px solid #2563eb;
+  border-radius: 15px;
+  padding: 25px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: 100%;
+  max-width: 260px;
+  min-height: 220px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hobbyinfo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ✅ 이미지 */
+.hobbyinfo-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+/* ✅ 취미 이름 */
+.hobbyinfo-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e3a8a;
+  margin-bottom: 8px;
+}
+
+/* ✅ 설명 문구 */
+.hobbyinfo-desc {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* ✅ 반응형 조정 */
+@media (max-width: 768px) {
+  .hobbyinfo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+  }
+
+  .hobbyinfo-card {
+    max-width: 200px;
+    min-height: 180px;
+  }
+
+  .hobbyinfo-image {
+    width: 60px;
+    height: 60px;
+  }
+}

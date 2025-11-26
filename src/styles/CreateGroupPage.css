@@ -1,0 +1,329 @@
+/* 전체 페이지 */
+.create-group-page {
+  background-color: #fffefe;
+  padding: 5px 5px 5px 5px;
+  font-family: "Pretendard", sans-serif;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+/* 상단 헤더 */
+.create-group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+/* 메인 레이아웃 */
+.create-group-layout {
+  display: flex;
+  gap: 36px;
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 11px;
+  justify-content: space-between;
+}
+
+/* 왼쪽 입력 영역 */
+.create-group-left {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1;
+}
+
+.create-group-left input,
+.create-group-left textarea,
+.create-group-left select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #ebebeb;
+  font-size: 14px;
+  box-sizing: border-box;
+  height: 43px;
+}
+
+.create-group-left textarea {
+  height: 108px;
+  resize: none;
+}
+
+/* 온/오프 + 장소 입력 한 줄 정렬 */
+.create-group-location-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.create-group-location-row input {
+  margin: 0;
+}
+
+/* 온/오프 토글 버튼 */
+.create-group-toggle {
+  padding: 0 14px;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  width: auto;
+  box-sizing: border-box;
+  margin: 0;
+  align-self: flex-start;
+}
+
+/* 토글 상태별 색상 */
+.create-group-toggle.online {
+  background-color: #bcd6ff;
+  color: #003366;
+}
+
+.create-group-toggle.offline {
+  background-color: #ffd6b8;
+  color: #663300;
+}
+
+/* hover 효과 */
+.create-group-toggle:hover {
+  opacity: 0.9;
+}
+
+/* 버튼 행 */
+.create-group-btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.create-group-cancel-btn {
+  padding: 11px 54px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #d3d3d3;
+  color: #333;
+  transition: background 0.2s ease;
+}
+
+.create-group-submit-btn {
+  padding: 11px 54px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #4a90e2;
+  color: white;
+  transition: background 0.2s ease;
+}
+
+.create-group-cancel-btn:hover {
+  background-color: #c0c0c0;
+}
+
+.create-group-submit-btn:hover {
+  background-color: #357abd;
+}
+
+/* 오른쪽 영역 */
+.create-group-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* 캘린더 영역 */
+.create-group-calendar {
+  background: #f1f1f1;
+  border-radius: 7px;
+  padding: 22px;
+}
+
+.create-group-calendar h4 {
+  margin-bottom: 14px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* react-calendar 스타일링 */
+.create-group-calendar .react-calendar {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  font-size: 14px;
+  border: none;
+  background: #fff;
+  border-radius: 7px;
+  font-family: "Pretendard", sans-serif;
+  margin-top: 5px;
+  padding: 14px;
+}
+
+/* 요일, 날짜 색상 */
+.react-calendar__month-view__weekdays__weekday abbr {
+  color: #000 !important;
+  font-weight: 600;
+}
+
+.react-calendar__tile {
+  color: #000 !important;
+  padding: 18px 0 !important;
+  font-size: 14px !important;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #d33 !important;
+}
+
+/* 선택된 날짜 */
+.react-calendar__tile--active {
+  background: rgba(150, 150, 255, 0.4) !important;
+  color: #000 !important;
+  border-radius: 9px;
+}
+
+/* 오늘 날짜 강조 */
+.today-highlight {
+  background: none !important;
+  border: 2px solid #a6b1ff !important;
+  border-radius: 50%;
+  color: #000 !important;
+}
+
+/* 선택한 날짜 표시 */
+.selected-date {
+  margin-top: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  text-align: right;
+}
+
+/* 캘린더 상단 (연도/월 네비게이션) */
+.react-calendar__navigation {
+  height: 63px !important;
+  margin-bottom: 9px;
+}
+
+.react-calendar__navigation button {
+  font-size: 16px !important;
+  color: #000 !important;
+  font-weight: 700;
+  height: 100% !important;
+  line-height: 1.6 !important;
+  padding: 7px 13px !important;
+  background: none !important;
+}
+
+.react-calendar__navigation button:enabled:hover {
+  background-color: rgba(166, 177, 255, 0.2);
+  border-radius: 5px;
+}
+
+/* 네비게이션 아이콘 (‹, › 등) */
+.react-calendar__navigation__arrow {
+  font-size: 18px !important;
+  padding: 0 5px;
+  color: #000 !important;
+  line-height: 1 !important;
+}
+
+/* 월/연도 전환 시 글자 겹침 방지 */
+.react-calendar__year-view__months__month,
+.react-calendar__decade-view__years__year {
+  padding: 11px 0 !important;
+  font-size: 14px !important;
+  color: #000 !important;
+  line-height: 1.4 !important;
+}
+
+/* 공지사항 */
+.create-group-notice {
+  background: #f1f1f1;
+  border-radius: 7px;
+  padding: 18px;
+}
+
+.create-group-notice h4 {
+  margin-top: 3px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.create-group-notice input {
+  width: 100%;
+  margin-top: 5px;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  font-size: 14px;
+  height: 43px;
+  box-sizing: border-box;
+}
+
+/* 카테고리 셀렉트 */
+.create-group-category {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #ebebeb;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.create-group-category:hover {
+  background-color: #f5f5f5;
+}
+
+.create-group-category:focus {
+  outline: none;
+  border-color: #a6b1ff;
+  background-color: #fff;
+  box-shadow: 0 0 4px rgba(166, 177, 255, 0.4);
+}
+
+.image-upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+
+.image-upload-section label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.image-upload-btn {
+  padding: 9px 18px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.2s;
+  width: fit-content;
+}
+
+.image-upload-btn:hover {
+  background-color: #357abd;
+}
