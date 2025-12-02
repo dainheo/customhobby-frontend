@@ -6,7 +6,7 @@
 import axios from "axios";
 
 // Spring Boot의 중계 API 주소
-const SPRING_API_URL = "http://localhost:8080/api/recommend";
+const API_BASE_URL = "https://customhobby-backend-production.up.railway.app/api/hobby-groups";
 
 /**
  * 사용자 설문 응답(userData)을 Spring Boot를 통해 Flask로 전송하고

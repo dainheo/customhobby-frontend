@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8080/api/users"; 
+const API_BASE_URL = "https://customhobby-backend-production.up.railway.app/api/users";
 
 // 회원가입
 export const registerUser = async (userData) => {

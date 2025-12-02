@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8080/api/hobbies";
+const API_BASE_URL = "https://customhobby-backend-production.up.railway.app/api/hobbies";
 
 // 취미 생성
 export const createHobby = async (hobbyData) => {

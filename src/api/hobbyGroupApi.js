@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_BASE_URL = "http://localhost:8080/api/hobby-groups";
+const API_BASE_URL = "https://customhobby-backend-production.up.railway.app/api/hobby-groups";
 
 // 1. 모임 개설
 export const createHobbyGroup = async (groupData) => {
