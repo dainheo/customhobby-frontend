@@ -4,6 +4,8 @@ import axios from "axios";
 import { getAllHobbyGroups } from "../api/hobbyGroupApi";
 import "../styles/HobbyDescriptionPage.css";
 
+const API_BASE = "https://customhobby-backend-production.up.railway.app/api";
+
 export default function HobbyDescriptionPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -18,18 +20,17 @@ export default function HobbyDescriptionPage() {
         let hobbyData;
 
         if (/^\d+$/.test(id)) {
-          const res = await axios.get(`http://localhost:8080/api/hobbies/${id}`);
+          const res = await axios.get(`${API_BASE}/hobbies/${id}`);
           hobbyData = res.data;
         } else {
           const res = await axios.get(
-            `http://localhost:8080/api/hobbies/name?hobbyName=${encodeURIComponent(id)}`
+            `${API_BASE}/hobbies/name?hobbyName=${encodeURIComponent(id)}`
           );
           hobbyData = Array.isArray(res.data) ? res.data[0] : res.data;
         }
 
         setMainHobby(hobbyData);
 
-        // Official group 형태 변환
         const officialGroup = {
           id: "official-" + hobbyData.id,
           groupName: hobbyData.oneLineDescription,
@@ -40,7 +41,6 @@ export default function HobbyDescriptionPage() {
           source: "official",
         };
 
-        // User groups
         const allUserGroups = await getAllHobbyGroups();
         const userGroups = allUserGroups
           .filter((g) => g.hobbyName === hobbyData.hobbyName)
@@ -109,7 +109,6 @@ export default function HobbyDescriptionPage() {
         </div>
       </div>
 
-      {/* 오른쪽 모임 리스트 */}
       <div className="hdp-right">
         <h2 className="hdp-subtitle">이 취미의 모임 목록</h2>
 
@@ -118,10 +117,9 @@ export default function HobbyDescriptionPage() {
             <div
               key={g.id}
               className="hdp-meeting-card"
-              onClick={() => {
-                console.log("➡ 모임 클릭 → groupId 전달:", g.id);
-                navigate(`/hobby-detail/${mainHobby.id}?groupId=${g.id}`);
-              }}
+              onClick={() =>
+                navigate(`/hobby-detail/${mainHobby.id}?groupId=${g.id}`)
+              }
             >
               <img
                 src={

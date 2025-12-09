@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../styles/HobbyInfoPage.css";
 
+const API_BASE = "https://customhobby-backend-production.up.railway.app/api";
+
 export default function HobbyInfoPage() {
-  const { id } = useParams(); // URL에서 카테고리 id 받기 (예: art, music 등)
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [hobbies, setHobbies] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // ✅ 카테고리 이름 매핑
   const categoryNames = {
   art: "예술/공예",
   health: "운동/건강",
@@ -74,24 +75,18 @@ export default function HobbyInfoPage() {
     "볼링": "bowling",
   };
 
-  // ✅ DB에서 모든 취미 불러오기
   useEffect(() => {
-    fetch("http://localhost:8080/api/hobbies")
+    fetch(`${API_BASE}/hobbies`)
       .then((res) => res.json())
       .then((data) => {
-
         const categoryName = categoryNames[id] || "";
-
-        // ✅ 카테고리별 필터링
         const filtered = data.filter(
           (hobby) => hobby.hobbyCategory === categoryName
         );
-        // ✅ 중복된 취미 이름 제거
+
         const unique = filtered.filter(
-          (h, i, arr) =>
-            arr.findIndex((o) => o.hobbyName === h.hobbyName) === i
+          (h, i, arr) => arr.findIndex((o) => o.hobbyName === h.hobbyName) === i
         );
-  
 
         setHobbies(unique);
         setLoading(false);
@@ -115,23 +110,19 @@ export default function HobbyInfoPage() {
             <div
               key={hobby.id}
               className="hobbyinfo-card"
-              onClick={() => navigate(`/hobby/${hobby.id}`)} // ✅ DB id로 이동
+              onClick={() => navigate(`/hobby/${hobby.id}`)}
             >
               <img
-  src={
-    hobby.photo && hobby.photo.trim() !== ""
-      ? `${window.location.origin}${
-          hobby.photo.startsWith("/") ? hobby.photo : "/" + hobby.photo
-        }`
-      : `${window.location.origin}/images/${
-          hobby.photo || "default"
-        }.png`
-  }
-  alt={hobby.hobbyName}
-  className="hobbyinfo-image"
-/>
-
-
+                src={
+                  hobby.photo && hobby.photo.trim() !== ""
+                    ? `${window.location.origin}${
+                        hobby.photo.startsWith("/") ? hobby.photo : "/" + hobby.photo
+                      }`
+                    : `${window.location.origin}/images/default.png`
+                }
+                alt={hobby.hobbyName}
+                className="hobbyinfo-image"
+              />
 
               <h3 className="hobbyinfo-name">{hobby.hobbyName}</h3>
               <p className="hobbyinfo-desc">{hobby.oneLineDescription}</p>

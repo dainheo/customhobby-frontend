@@ -4,6 +4,8 @@ import "../styles/MainPage.css";
 import { getHobbyRecommendations } from "../api/recommendApi";
 import { useAuth } from "../context/AuthContext";
 
+const API_BASE = "https://customhobby-backend-production.up.railway.app/api";
+
 export default function MainPage() {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth();
@@ -13,7 +15,6 @@ export default function MainPage() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔠 취미 → 이미지 매핑
   const imageMap = {
     "그림 그리기": "art",
     "캘리그래피": "calligraphy",
@@ -71,16 +72,15 @@ export default function MainPage() {
 
     const fetchUserData = async () => {
       try {
-        const res = await fetch(`http://localhost:8080/api/users/${user.userId}`);
+        const res = await fetch(`${API_BASE}/users/${user.userId}`);
         if (!res.ok) throw new Error("유저 정보 요청 실패");
 
         const data = await res.json();
 
-        // hasSurvey 확인 - 설문 완료 여부 체크
-        if (!data.hasSurvey){
-          console.log("설문조사 미완료 - 추천 API 호출 안함");
-          setUserData(null); // userData를 null 로 설정하여 추천 API 호출 방지
-          setLoading(flase);
+        // 설문 미완료 시 추천 X
+        if (!data.hasSurvey) {
+          setUserData(null);
+          setLoading(false);
           return;
         }
 
@@ -108,7 +108,7 @@ export default function MainPage() {
     fetchUserData();
   }, [user, isAuthenticated]);
 
-  // (2) Flask 추천 결과 불러오기
+  // (2) 추천 취미 불러오기
   useEffect(() => {
     if (!userData) return;
 
@@ -132,23 +132,21 @@ export default function MainPage() {
     fetchRecs();
   }, [userData]);
 
-  // (3) 새로운 취미 — 중복 제거 + 추천 제외
+  // (3) 새로운 취미 리스트
   useEffect(() => {
     const fetchNewHobbies = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/hobbies");
+        const res = await fetch(`${API_BASE}/hobbies`);
         if (!res.ok) throw new Error("취미 목록 요청 실패");
 
         const data = await res.json();
 
-        // 1️⃣ hobbyName 기준 중복 제거
-        const uniqueList = data.filter(
+        const unique = data.filter(
           (h, idx, self) =>
             idx === self.findIndex((x) => x.hobbyName === h.hobbyName)
         );
 
-        // 2️⃣ 추천 취미 제외
-        const filtered = uniqueList.filter(
+        const filtered = unique.filter(
           (hobby) =>
             !recommendedHobbies.some(
               (rec) =>
@@ -156,7 +154,6 @@ export default function MainPage() {
             )
         );
 
-        // 3️⃣ 랜덤 3개 출력
         const shuffled = [...filtered].sort(() => Math.random() - 0.5);
         setNewHobbies(shuffled.slice(0, 3));
       } catch (err) {
@@ -203,8 +200,8 @@ export default function MainPage() {
                         ? `/images/${imageMap[hobby] || "default"}.png`
                         : `/images/${imageMap[hobby.hobbyName] || "default"}.png`
                     }
-                    onError={(e) => (e.target.src = "/images/default.png")}
                     alt={typeof hobby === "string" ? hobby : hobby.hobbyName}
+                    onError={(e) => (e.target.src = "/images/default.png")}
                   />
                   <p>{typeof hobby === "string" ? hobby : hobby.hobbyName}</p>
                 </div>
@@ -218,7 +215,7 @@ export default function MainPage() {
         </div>
       </div>
 
-      {/* 새로운 취미 보기 */}
+      {/* 새로운 취미 */}
       <div className="main-wrapper">
         <h2
           className="main-title"
@@ -239,8 +236,8 @@ export default function MainPage() {
                 >
                   <img
                     src={hobby.photo || "/images/default.png"}
-                    onError={(e) => (e.target.src = "/images/default.png")}
                     alt={hobby.hobbyName}
+                    onError={(e) => (e.target.src = "/images/default.png")}
                   />
                   <p>{hobby.hobbyName}</p>
                 </div>

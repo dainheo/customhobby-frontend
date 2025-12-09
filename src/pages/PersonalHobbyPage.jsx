@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { getHobbyRecommendations } from "../api/recommendApi";
 import { useAuth } from "../context/AuthContext";
 
+const API_BASE = "https://customhobby-backend-production.up.railway.app/api";
+
 export default function PersonalHobbyPage() {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth();
@@ -60,7 +62,7 @@ export default function PersonalHobbyPage() {
     "볼링": "bowling",
   };
 
-  // (1) 유저 정보 불러오기
+  // (1) 유저 데이터 불러오기
   useEffect(() => {
     const fetchUserData = async () => {
       if (!isAuthenticated || !user) {
@@ -70,10 +72,9 @@ export default function PersonalHobbyPage() {
       }
 
       try {
-        const res = await fetch(`http://localhost:8080/api/users/${user.userId}`);
-        if (!res.ok) throw new Error("유저 정보 요청 실패");
-
+        const res = await fetch(`${API_BASE}/users/${user.userId}`);
         const data = await res.json();
+
         setUserData({
           gender: data.gender || "",
           age_group: data.ageGroup || "",
@@ -94,14 +95,14 @@ export default function PersonalHobbyPage() {
     fetchUserData();
   }, [user, isAuthenticated, navigate]);
 
-  // (2) Flask 추천 API
+  // (2) 추천 취미 API 호출
   useEffect(() => {
     const fetchRecommendations = async () => {
       if (!userData) return;
 
       try {
         const recs = await getHobbyRecommendations(userData);
-        setRecommendedHobbies(recs.slice(0, 5)); // 상위 5개
+        setRecommendedHobbies(recs.slice(0, 5));
       } catch (error) {
         console.error("추천 취미 불러오기 실패:", error);
       } finally {
@@ -119,7 +120,6 @@ export default function PersonalHobbyPage() {
       <h2 className="ph-title">🎯 당신을 위한 추천 취미 5가지</h2>
 
       <div className="ph-grid">
-        {/* 추천 취미 5개 카드 출력 */}
         {recommendedHobbies.map((hobby, index) => (
           <div
             key={index}
@@ -152,11 +152,9 @@ export default function PersonalHobbyPage() {
           </div>
         ))}
 
-        {/* 빈칸 2개 */}
         <div className="ph-empty-box"></div>
         <div className="ph-empty-box"></div>
 
-        {/* 마지막 칸 버튼 */}
         <div className="ph-go-main" onClick={() => navigate("/main")}>
           ← 메인 페이지로 돌아가기
         </div>
